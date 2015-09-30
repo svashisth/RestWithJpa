@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class GreetController {
-    private static final String template = "Hello, %s!";
+    private static final String template = "Hello, %s! The user count is %s";
     private final AtomicLong counter = new AtomicLong();
     
     @RequestMapping(value = "/greeter", method = RequestMethod.GET)
     public String meetAndGreet(@RequestParam(value="name", defaultValue="World") String name) {
-        return String.format(template, name);
+        return String.format(template, name, counter.getAndIncrement());
     }
 }
